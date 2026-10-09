@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ==========================================
+         BASIC HTML SETTINGS
+    =========================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Search movies, ratings, posters and detailed movie information."
+    >
+
+    <title>MovieVerse - Movie Search App</title>
+
+
+    <!-- ==========================================
+         GOOGLE FONT
+    =========================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ==========================================
+         CSS
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="./style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         DECORATIVE BACKGROUND
+    =========================================== -->
+
+    <div class="background-shape shape-one"></div>
+
+    <div class="background-shape shape-two"></div>
+
+    <div class="background-shape shape-three"></div>
+
+
+    <!-- ==========================================
+         MAIN CONTAINER
+    =========================================== -->
+
+    <main class="movie-container">
+
+
+        <!-- ==========================================
+             HEADER / NAVBAR
+        =========================================== -->
+
+        <header class="header">
+
+
+            <!-- Logo -->
+
+            <div class="brand">
+
+                <div class="movie-logo">
+                    🎬
+                </div>
+
+                <div class="brand-text">
+
+                    <h1>
+                        MovieVerse
+                    </h1>
+
+                    <span>
+                        Discover • Explore • Watch
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Theme Button -->
+
+            <button
+                type="button"
+                id="themeButton"
+                class="theme-button"
+                title="Change theme"
+            >
+                🌙
+            </button>
+
+        </header>
+
+
+        <!-- ==========================================
+             HERO SECTION
+        =========================================== -->
+
+        <section class="hero-section">
+
+
+            <div class="hero-content">
+
+                <span class="hero-badge">
+                    🍿 Your Movie Destination
+                </span>
+
+
+                <h2>
+                    Find Your
+                    <span>Favorite Movies</span>
+                </h2>
+
+
+                <p>
+                    Search thousands of movies and discover
+                    posters, ratings, release years and
+                    detailed information.
+                </p>
+
+            </div>
+
+
+            <!-- Decorative movie emojis -->
+
+            <div class="floating-movie movie-one">
+                🎞️
+            </div>
+
+            <div class="floating-movie movie-two">
+                ⭐
+            </div>
+
+            <div class="floating-movie movie-three">
+                🍿
+            </div>
+
+
+        </section>
+
+
+        <!-- ==========================================
+             SEARCH SECTION
+        =========================================== -->
+
+        <section class="search-section">
+
+
+            <form
+                id="movieForm"
+                class="search-form"
+            >
+
+
+                <!-- Search Input -->
+
+                <div class="input-container">
+
+                    <span class="search-icon">
+                        🔍
+                    </span>
+
+                    <input
+                        type="text"
+                        id="movieInput"
+                        placeholder="Search for a movie..."
+                        autocomplete="off"
+                        aria-label="Movie title"
+                    >
+
+                    <!-- Clear input button -->
+
+                    <button
+                        type="button"
+                        id="clearButton"
+                        class="clear-button hidden"
+                        title="Clear search"
+                    >
+                        ✕
+                    </button>
+
+                </div>
+
+
+                <!-- Search Button -->
+
+                <button
+                    type="submit"
+                    id="searchButton"
+                    class="search-button"
+                >
+
+                    <span>
+                        🔍
+                    </span>
+
+                    Search
+
+                </button>
+
+
+            </form>
+
+
+            <!-- ==========================================
+                 SEARCH SUGGESTIONS
+            =========================================== -->
+
+            <div class="search-suggestions">
+
+                <span>
+                    Try searching:
+                </span>
+
+                <button
+                    type="button"
+                    class="suggestion-button"
+                    data-movie="Avengers"
+                >
+                    Avengers
+                </button>
+
+                <button
+                    type="button"
+                    class="suggestion-button"
+                    data-movie="Inception"
+                >
+                    Inception
+                </button>
+
+                <button
+                    type="button"
+                    class="suggestion-button"
+                    data-movie="Titanic"
+                >
+                    Titanic
+                </button>
+
+                <button
+                    type="button"
+                    class="suggestion-button"
+                    data-movie="Interstellar"
+                >
+                    Interstellar
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ==========================================
+             LOADING SECTION
+        =========================================== -->
+
+        <div
+            id="loading"
+            class="loading hidden"
+        >
+
+            <div class="loader"></div>
+
+            <h3>
+                Searching Movies...
+            </h3>
+
+            <p>
+                Please wait while we find the best results.
+            </p>
+
+        </div>
+
+
+        <!-- ==========================================
+             ERROR SECTION
+        =========================================== -->
+
+        <div
+            id="errorMessage"
+            class="error-message hidden"
+            role="alert"
+        >
+
+            <div class="error-icon">
+                ⚠️
+            </div>
+
+            <div>
+
+                <h3>
+                    Oops!
+                </h3>
+
+                <p id="errorText">
+                    Something went wrong.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             WELCOME SECTION
+        =========================================== -->
+
+        <section
+            id="welcomeMessage"
+            class="welcome-message"
+        >
+
+            <div class="welcome-animation">
+
+                <div class="film-reel">
+                    🎞️
+                </div>
+
+                <div class="popcorn">
+                    🍿
+                </div>
+
+            </div>
+
+
+            <h2>
+                What do you want to watch?
+            </h2>
+
+            <p>
+                Search for any movie and explore
+                its information instantly.
+            </p>
+
+
+            <!-- Feature Highlights -->
+
+            <div class="feature-list">
+
+
+                <div class="feature-item">
+
+                    <span>
+                        🎬
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Movie Posters
+                        </strong>
+
+                        <small>
+                            High-quality movie artwork
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <span>
+                        ⭐
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Ratings
+                        </strong>
+
+                        <small>
+                            Check movie ratings
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <span>
+                        📅
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Release Info
+                        </strong>
+
+                        <small>
+                            Discover release years
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <span>
+                        📝
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Movie Details
+                        </strong>
+
+                        <small>
+                            Explore detailed information
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             RESULTS SECTION
+        =========================================== -->
+
+        <section
+            id="movieResults"
+            class="movie-results hidden"
+        >
+
+
+            <!-- Results Header -->
+
+            <div class="results-header">
+
+
+                <div>
+
+                    <span class="section-label">
+                        🎥 DISCOVER
+                    </span>
+
+                    <h2>
+                        Search Results
+                    </h2>
+
+                </div>
+
+
+                <div class="result-info">
+
+                    <span id="resultCount">
+                        0 movies
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ==========================================
+                 FILTER / SORT BAR
+            =========================================== -->
+
+            <div class="filter-bar">
+
+
+                <div class="filter-title">
+                    <span>
+                        🎯
+                    </span>
+
+                    <span>
+                        Refine Results
+                    </span>
+                </div>
+
+
+                <select
+                    id="sortSelect"
+                    class="sort-select"
+                >
+
+                    <option value="default">
+                        Sort by
+                    </option>
+
+                    <option value="year">
+                        Release Year
+                    </option>
+
+                    <option value="title">
+                        Movie Name
+                    </option>
+
+                </select>
+
+
+            </div>
+
+
+            <!-- ==========================================
+                 MOVIE GRID
+            =========================================== -->
+
+            <div
+                id="movieGrid"
+                class="movie-grid"
+            >
+
+                <!--
+                    Movie cards will be created
+                    dynamically using JavaScript.
+                -->
+
+            </div>
+
+
+            <!-- ==========================================
+                 LOAD MORE
+            =========================================== -->
+
+            <button
+                type="button"
+                id="loadMoreButton"
+                class="load-more-button hidden"
+            >
+                Load More Movies
+            </button>
+
+
+        </section>
+
+
+        <!-- ==========================================
+             MOVIE DETAILS MODAL
+        =========================================== -->
+
+        <div
+            id="movieModal"
+            class="movie-modal hidden"
+        >
+
+
+            <div class="modal-overlay"></div>
+
+
+            <div class="modal-content">
+
+
+                <!-- Close button -->
+
+                <button
+                    type="button"
+                    id="closeModal"
+                    class="close-modal"
+                    title="Close"
+                >
+                    ✕
+                </button>
+
+
+                <!-- Movie details inserted here -->
+
+                <div
+                    id="movieDetails"
+                    class="movie-details"
+                >
+
+                    <!-- JavaScript will generate details -->
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             FAVORITES SECTION
+        =========================================== -->
+
+        <section
+            id="favoritesSection"
+            class="favorites-section hidden"
+        >
+
+            <div class="section-heading">
+
+                <span>
+                    ❤️
+                </span>
+
+                <div>
+
+                    <h2>
+                        My Favorites
+                    </h2>
+
+                    <p>
+                        Your saved movies
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="favoritesGrid"
+                class="favorites-grid"
+            >
+
+                <!-- Favorite movies will appear here -->
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             PROJECT INFORMATION
+        =========================================== -->
+
+        <section class="info-section">
+
+
+            <div class="info-card">
+
+                <span class="info-icon">
+                    ⚡
+                </span>
+
+                <h3>
+                    Fast Search
+                </h3>
+
+                <p>
+                    Quickly find movies using
+                    the movie database API.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <span class="info-icon">
+                    🌟
+                </span>
+
+                <h3>
+                    Movie Ratings
+                </h3>
+
+                <p>
+                    Check ratings and important
+                    movie information.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <span class="info-icon">
+                    📱
+                </span>
+
+                <h3>
+                    Responsive
+                </h3>
+
+                <p>
+                    Designed to work smoothly on
+                    desktop, tablet and mobile.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ==========================================
+             FOOTER
+        =========================================== -->
+
+        <footer class="footer">
+
+
+            <div class="footer-logo">
+                🎬 MovieVerse
+            </div>
+
+
+            <p>
+                Movie data powered by OMDb API
+            </p>
+
+
+            <p class="footer-small">
+                Built with HTML5 • CSS3 • JavaScript ES6+
+            </p>
+
+
+        </footer>
+
+
+    </main>
+
+
+    <!-- ==========================================
+         JAVASCRIPT MODULE
+    =========================================== -->
+
+    <script
+        type="module"
+        src="./js/main.js"
+    ></script>
+
+
+</body>
+
+</html>
